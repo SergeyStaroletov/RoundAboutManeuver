@@ -15,28 +15,40 @@
    ((protectedzone) ^ (2))
 
 */
-double X1(double t, double om, double C1, double C3, double C4) {
-  return C1 + C4 * (cos(om * t) - 1) / om + C3 * sin(om * t) / om;
-}
-double X2(double t, double om, double C2, double C3, double C4) {
-  return C2 + C3 * (1 - cos(om * t)) / om + C4 * sin(om * t) / om;
-}
-double D1(double t, double om, double C3, double C4) {
-  return C3 * cos(om * t) - C4 * sin(om * t);
-}
-double D2(double t, double om, double C3, double C4) {
-  return C4 * cos(om * t) + C3 * sin(om * t);
+double X1(double t, double om, double d1_0, double d2_0, double x1_0) {
+  return d1_0 * sin(om * t) / om + d2_0 * cos(om * t) / om + x1_0 * om -
+         d2_0 / om;
 }
 
-double Y1(double t, double e1, double C5) { return e1 * t + C5; }
-double Y2(double t, double e2, double C6) { return e2 * t + C6; }
-
-double E1(double t, double omy, double C7, double C8) {
-  return C7 * cos(omy * t) - C8 * sin(omy * t);
+double X2(double t, double om, double d1_0, double d2_0, double x2_0) {
+  return d2_0 * sin(om * t) / om - d1_0 * cos(om * t) / om + x2_0 * om +
+         d1_0 / om;
 }
 
-double E2(double t, double omy, double C7, double C8) {
-  return C8 * cos(omy * t) + C7 * sin(omy * t);
+double D1(double t, double om, double d1_0, double d2_0) {
+  return d1_0 * cos(om * t) - d2_0 * sin(om * t);
+}
+
+double D2(double t, double om, double d1_0, double d2_0) {
+  return d1_0 * sin(om * t) + d2_0 * cos(om * t);
+}
+
+double Y1(double t, double omy, double e1_0, double e2_0, double y1_0) {
+  return e1_0 * sin(omy * t) / omy + e2_0 * cos(omy * t) / omy + y1_0 * omy -
+         e2_0 / omy;
+}
+
+double Y2(double t, double omy, double e1_0, double e2_0, double y2_0) {
+  return e2_0 * sin(omy * t) / omy - e1_0 * cos(omy * t) / omy + y2_0 * omy +
+         e1_0 / omy;
+}
+
+double E1(double t, double omy, double e1_0, double e2_0) {
+  return e1_0 * cos(omy * t) - e2_0 * sin(omy * t);
+}
+
+double E2(double t, double omy, double e1_0, double e2_0) {
+  return e1_0 * sin(omy * t) + e2_0 * cos(omy * t);
 }
 
 bool check_safety(double x1, double x2, double y1, double y2,
